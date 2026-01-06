@@ -1,0 +1,31 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Serial no</th>
+      <th scope="col">GST_no</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Address</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in data1 %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ i.GST_no }}</td>
+      <td>{{ i.name }}</td>
+      <td>{{ i.email }}</td>
+      <td>{{ i.phone_number }}</td>
+      <td>{{ i.address }}</td>
+      <td><a class="btn btn-primary" href="{% url 'edit_seller' i.id %}" role="button">Edit</a></td>
+      <td><a class="btn btn-primary" href="{% url 'delete_seller' i.id %}" role="button">Delete</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
