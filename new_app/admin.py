@@ -6,3 +6,4 @@ from new_app import models
 admin.site.register(models.Seller)
 admin.site.register(models.Customer)
 admin.site.register(models.Login)
+admin.site.register(models.Product)

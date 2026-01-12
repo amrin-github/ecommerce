@@ -1,7 +1,9 @@
+from xml.dom.minidom import Document
+
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from new_app.models import Login, Seller, Customer
+from new_app.models import Login, Seller, Customer, Product
 
 
 # login
@@ -28,3 +30,10 @@ class CustomerForm(forms.ModelForm):
         model = Customer
         fields = "__all__"
         exclude = ('user',)
+
+# product
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('name','price','count','seller_image',)
+

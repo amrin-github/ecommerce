@@ -174,4 +174,3 @@ def edit_customer_profile(request,id):
 
 
 
-
