@@ -1,0 +1,20 @@
+{% extends 'customer/customer_base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+      {% for pro in products %}
+      <div class="col-md-4 mb-4 mt-4">
+        <div class="card h-100">
+          <img src="{{ pro.product.seller_image.url }}" class="card-img-top" alt="{{ pro.product.name }}">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ pro.product.name }}</h5>
+            <p class="card-text">₹{{ pro.product.price }}</p>
+              <a href="{% url 'delete_item' pro.id %}" class="btn btn-success btn-sm">Delete</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

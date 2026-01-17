@@ -1,0 +1,9 @@
+{% extends "admin/admin_base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form1|crispy }}
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>
+{% endblock %}

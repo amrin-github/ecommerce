@@ -37,4 +37,18 @@ class Product(models.Model):
     count = models.IntegerField()
     seller_image = models.ImageField(upload_to='product/')
 
+# add to chart
+class AddToCart(models.Model):
+    user = models.ForeignKey(Customer,on_delete=models.CASCADE,related_name='add_to_cart')
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name='add_product')
+
+# buy
+class BuyNow(models.Model):
+    user =models.ForeignKey(Customer, on_delete=models.CASCADE, related_name= 'b_cart')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cart')
+    status = models.BooleanField(default=0)
+    count = models.IntegerField()
+    delivery_address = models.TextField()
+    delivery_phone_number = models.CharField(max_length=10)
+
 

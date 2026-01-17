@@ -1,0 +1,12 @@
+{% extends "customer/customer_base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h3>{{ product1.name }}</h3>
+<img src="{{ product1.seller_image.url }}" class="w-50">
+<h3>Price: ₹{{ product1.price }}</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form1|crispy }}
+    <button type="submit" class="btn btn-success">Place Order</button>
+</form>
+{% endblock %}

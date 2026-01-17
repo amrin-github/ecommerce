@@ -1,0 +1,29 @@
+{% extends "seller/seller_base.html" %}
+{% block seller %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Serial number</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Count</th>
+      <th scope="col">Image</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in filter1 %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ i.name }}</td>
+      <td>{{ i.price }}</td>
+      <td>{{ i.count }}</td>
+      <td><img src = "{{ i.seller_image.url }}" style="width:100px; height:100px;"></td>
+      <td><a class="btn btn-primary" href="{% url 'product_filter_edit' i.id %}" role="button">Edit</a></td>
+      <td><a class="btn btn-primary" href="{% url 'product_filter_delete' i.id %}" role="button">Delete</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

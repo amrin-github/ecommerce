@@ -1,6 +1,6 @@
-{% extends 'dashboard.html' %}
+{% extends 'seller/seller_base.html' %}
 
-{% block content %}
+{% block seller %}
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
