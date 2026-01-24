@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from new_app.forms import ProductForm, LoginRegister, SellerForm
@@ -5,6 +7,7 @@ from new_app.models import Seller, Product, BuyNow, Customer
 
 
 # seller base
+@login_required(login_url='login_view')
 def seller_base(request):
     return render(request,'seller/seller_base.html')
 
@@ -29,6 +32,7 @@ def seller_form(request):
     return render(request,'seller/seller_form.html',{'form1':form1,'form2':form2})
 
 # seller profile
+@login_required(login_url='login_view')
 def seller_profile(request):
     user_data = request.user
     # print(user_data.id)
@@ -37,6 +41,7 @@ def seller_profile(request):
     return render(request,'seller/seller_profile.html',{'seller1':seller})
 
 # edit seller profile
+@login_required(login_url='login_view')
 def edit_seller_profile(request,id):
     data = Seller.objects.get(id=id)
     form = SellerForm(instance=data)
@@ -48,6 +53,7 @@ def edit_seller_profile(request,id):
     return render(request,'seller/edit_seller_profile.html',{'form1':form})
 
 # product
+@login_required(login_url='login_view')
 def product_upload(request):
     user_data = request.user
     seller = Seller.objects.get(user=user_data)
@@ -67,6 +73,7 @@ def product_upload(request):
 
 
 # filter product
+@login_required(login_url='login_view')
 def product_filter(request):
     product_user = request.user
     seller_user = Seller.objects.get(user=product_user)
@@ -74,12 +81,14 @@ def product_filter(request):
     return render(request,'seller/product_filter.html',{'filter1':filter1})
 
 # delete product filter
+@login_required(login_url='login_view')
 def product_filter_delete(request,id):
     delete_product = Product.objects.get(id=id)
     delete_product.delete()
     return redirect('product_filter')
 
 # edit product view
+@login_required(login_url='login_view')
 def product_filter_edit(request,id):
     data = Product.objects.get(id=id)
     form = ProductForm(instance=data)
@@ -93,10 +102,9 @@ def product_filter_edit(request,id):
     return render(request,'seller/product_filter_edit.html',{'form1':form})
 
 # product order list
+@login_required(login_url='login_view')
 def product_order_list(request):
     product_user = request.user
     seller_user = Seller.objects.get(user=product_user)
-    print(seller_user)
     filter1 = BuyNow.objects.filter(product__user=seller_user)
-    print(filter1)
     return render(request,'seller/product_order_list.html',{'filter1':filter1})

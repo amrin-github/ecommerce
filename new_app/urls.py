@@ -33,4 +33,7 @@ urlpatterns = [
     path("order_list", customer_views.order_list, name="order_list"),
     path("all_order", admin_views.all_order, name="all_order"),
     path("product_order_list", seller_views.product_order_list, name="product_order_list"),
+    path("cart_buy_now/<int:id>", customer_views.cart_buy_now, name="cart_buy_now"),
+    path("logout", views.logout_view, name="logout"),
+    path("all_product", admin_views.all_product, name="all_product"),
 ]

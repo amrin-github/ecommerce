@@ -8,16 +8,26 @@
   {% endfor %}
 {% endif %}
 
-
 <div class="container">
+    <div class="row">
+        <form method="get" class="form-inline " style="float:right;">
+            <div class="md-form my-0">
+                {{ productFilter.form }}
+                <button class="btn btn-primary mr-2" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
   <div class="row">
-    {% for product in products %}
+    {% for product in product %}
       <div class="col-md-4 mb-4 mt-4">
         <div class="card h-100">
           <img src="{{ product.seller_image.url }}" class="card-img-top" alt="{{ product.name }}">
           <div class="card-body text-center">
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">₹{{ product.price }}</p>
+              {% if product.count < 1 %}
+                <h4> Out of Stock</h4>
+              {% endif %}
             <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary btn-sm">Add to cart</a>
             <a href="{% url 'buy_now' product.id %}" class="btn btn-success btn-sm">Buy</a>
           </div>

@@ -1,5 +1,10 @@
 {% extends 'customer/customer_base.html' %}
 {% block content %}
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }} mt-2">
+      {{ message }}
+    </div>
+  {% endfor %}
 <div class="container">
   <div class="row">
       {% for pro in products %}
@@ -9,7 +14,11 @@
           <div class="card-body text-center">
             <h5 class="card-title">{{ pro.product.name }}</h5>
             <p class="card-text">₹{{ pro.product.price }}</p>
-              <a href="{% url 'delete_item' pro.id %}" class="btn btn-success btn-sm">Delete</a>
+              {% if pro.product.count < 1 %}
+                <h6> Out of Stock</h6>
+              {% endif %}
+              <a href="{% url 'cart_buy_now' pro.id %}" class="btn btn-success btn-sm">Buy</a>
+              <a href="{% url 'delete_item' pro.id %}" class="btn btn-primary btn-sm">Delete</a>
           </div>
         </div>
       </div>

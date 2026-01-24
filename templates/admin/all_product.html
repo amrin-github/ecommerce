@@ -1,6 +1,13 @@
-{% extends "seller/seller_base.html" %}
-{% block seller %}
-
+{% extends "admin/admin_base.html" %}
+{% block content %}
+<div class="row">
+        <form method="get" class="form-inline " style="float:right;">
+            <div class="md-form my-0">
+                {{ sellerFilter.form }}
+                <button class="btn btn-primary mr-2" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
 <table class="table">
   <thead>
     <tr>
@@ -9,12 +16,10 @@
       <th scope="col">Price</th>
       <th scope="col">Count</th>
       <th scope="col">Image</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
-  {% for i in filter1 %}
+  {% for i in product %}
     <tr>
       <th scope="row">{{ forloop.counter }}</th>
       <td>{{ i.name }}</td>
@@ -25,8 +30,6 @@
           <h4>{{ i.count }}</h4>
 {% endif %}</td>
       <td><img src = "{{ i.seller_image.url }}" style="width:100px; height:100px;"></td>
-      <td><a class="btn btn-primary" href="{% url 'product_filter_edit' i.id %}" role="button">Edit</a></td>
-      <td><a class="btn btn-primary" href="{% url 'product_filter_delete' i.id %}" role="button">Delete</a></td>
     </tr>
   {% endfor %}
   </tbody>

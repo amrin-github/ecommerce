@@ -1,16 +1,16 @@
 from urllib import request
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
-from new_app.forms import LoginRegister, SellerForm, CustomerForm
-from new_app.models import Customer, Seller
+from new_app.models import Product
 
 
 # Create your views here.
 # main page
 def home(request):
-    return render(request,'home.html')
+    product = Product.objects.all()
+    return render(request,'home.html',{'product':product})
 
 # dashboard
 def dashboard(request):
@@ -35,6 +35,11 @@ def login_view(request):
         else:
             print('Invalid username or password')
     return render(request,'login.html')
+
+# logout
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
 
